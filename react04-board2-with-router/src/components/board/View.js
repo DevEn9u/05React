@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 function View(props) {
   /**
@@ -54,7 +54,7 @@ function View(props) {
       </header>  
       <nav>
         <Link to="/list">목록</Link>&nbsp;
-        <Link to="/edit">수정</Link>&nbsp;
+        <Link to={"/edit/" + params.no}>수정</Link>&nbsp;
         <Link to="/delete">삭제</Link>
       </nav>
       <article>
