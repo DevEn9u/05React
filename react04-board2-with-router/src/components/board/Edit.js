@@ -2,19 +2,14 @@ import React, { useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 
 function Edit(props) {
-  
+  // State와 관련 데이터, 함수를 모두 받아온다.
   const boardData = props.boardData;
   const setBoardData = props.setBoardData;
-  const nextNo = props.nextNo;
-  const setNextNo = props.setNextNo;
   const navigate = props.navigate;
   const nowDate = props.nowDate;
 
   let params = useParams();
-
-  const [title, setTitle] = useState(props.selectRow.title);
-  const [writer, setWriter] = useState(props.selectRow.writer);
-  const [contents, setContents] = useState(props.selectRow.contents);
+  let pano = Number(params.no);
 
   /**
    * reduce()
@@ -23,7 +18,7 @@ function Edit(props) {
    */
 
   let vi = props.boardData.reduce((prev, curr) => {
-    if (curr.no === Number(params.no)) {
+    if (curr.no === pano) {
       /**
        * 초기값이 {}(빈 객체)로 주어졌으므로 배열의 크기만큼 반복할 수 있다. 조회할 게시물의 일련번호와 일치하는 객체를 찾아 prev에 저장한 후 반환한다.
        */
@@ -31,6 +26,11 @@ function Edit(props) {
     }
     return prev;
   }, {});
+
+  
+  const [title, setTitle] = useState(vi.title);
+  const [writer, setWriter] = useState(vi.writer);
+  const [contents, setContents] = useState(vi.contents)
 
   return (
     <>
@@ -48,8 +48,27 @@ function Edit(props) {
           let w = e.target.writer.value;
           let t = e.target.writer.value;
           let c = e.target.writer.value;
-          props.editAction(title, writer, contents);
+          
+          // 추가할 객체 생성
+          let editBoardData = {
+            no: pano,
+            writer: w,
+            title: t,
+            contents: c,
+            date: nowDate()
+          }
 
+          // 복사본 생성
+          let copyBoardData = [...boardData];
+          for (let i = 0; i < copyBoardData.length; i++) {
+            // 수정할 객체를 찾아서
+            if (copyBoardData[i].no === pano) {
+              // 변경.
+              copyBoardData[i] = editBoardData;
+              break;
+            }
+            
+          }
           
           // 복사본을 이용해 state를 변경한다. 
           setBoardData(copyBoardData);
@@ -63,20 +82,20 @@ function Edit(props) {
           <tbody>
             <tr>
               <th>작성자</th>
-              <td><input type="text" name="writer" value={vi.writer} onChange={(e) => {
+              <td><input type="text" name="writer" value={writer} onChange={(e) => {
                 setWriter(e.target.value)
               }} /></td>
             </tr>
             <tr>
               <th>제목</th>
-              <td><input type="text" name="title" value={vi.title} onChange={(e) => {
+              <td><input type="text" name="title" value={title} onChange={(e) => {
                 setTitle(e.target.value)
               }} /></td>
             </tr>
             <tr>
               <th>내용</th>
-              <td><textarea type="contents" cols="22" rows="3" value={vi.contents} onChange={(e) => {
-                setWriter(e.target.value)
+              <td><textarea name="contents" cols="22" rows="3" value={contents} onChange={(e) => {
+                setContents(e.target.value)
               }} ></textarea></td>
             </tr>
           </tbody>

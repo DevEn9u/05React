@@ -70,8 +70,6 @@ function App() {
               <Edit
                 boardData={boardData}
                 setBoardData={setBoardData}
-                nextNo={nextNo}
-                setNextNo={setNextNo}
                 navigate={navigate}
                 nowDate={nowDate}
               />
