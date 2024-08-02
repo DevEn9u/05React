@@ -11,7 +11,6 @@ function Edit(props) {
   const requestUrl = 'http://nakja.co.kr/APIs/php7/boardViewJSON.php';
   const parameter = 'tname=nboard_javascript&idx=' + params.idx;
 
-  
   useEffect(function () {
     fetch(requestUrl + '?' + parameter)
       .then((result) => {
@@ -27,14 +26,14 @@ function Edit(props) {
       };
     }, []);
   
-    const [writer, setWriter] = useState(boardData.name || '');
-    const [title, setTitle] = useState(boardData.subject || '');
-    const [contents, setContents] = useState(boardData.content || '');
+    const [writer, setWriter] = useState('');
+    const [title, setTitle] = useState('');
+    const [contents, setContents] = useState('');
     
     useEffect(() => {
-      setWriter(boardData.name || '');
-      setTitle(boardData.subject || '');
-      setContents(boardData.content || '');
+      setWriter(boardData.name);
+      setTitle(boardData.subject);
+      setContents(boardData.content);
     }, [boardData]);
   return (
     <>
