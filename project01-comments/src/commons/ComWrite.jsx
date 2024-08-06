@@ -1,54 +1,33 @@
 import React from 'react';
 
+//쓰기 컴포넌트
 function ComWrite(props) {
-  const myData = props.myData;
-  const setMyData = props.setMyData;
-  const nextNo = props.nextNo;
-  const setNextNo = props.setNextNo;
-  const nowDate = props.nowDate;
-
   return (
     <>
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-
-          let w = e.target.writer;
-          let c = e.target.comment;
-
-          if (w.value.trim() === '') {
-            alert('작성자를 입력하세요');
-            w.focus();
-            return;
-          }
-          if (c.value.trim() === '') {
-            alert('내용을 입력하세요');
-            c.focus();
-            return;
-          }
-          // 추가할 객체
-          let addComData = {
-            no: nextNo,
-            writer: w.value,
-            comment: c.value,
-            date: nowDate(),
-          };
-
-          // 복사본 생성
-          let copyComData = [...myData];
-          copyComData.push(addComData);
-
-          setMyData(copyComData);
-          setNextNo(nextNo + 1);
-
-          w.value = '';
-          c.value = '';
+        onSubmit={(event) => {
+          event.preventDefault();
+          //이벤트 객체를 통해 폼값 가져오기
+          let writer = event.target.writer.value;
+          let contents = event.target.contents.value;
+          /* 입력값 지우기. React는 화면의 새로고침이 없으므로 화면전환이 없는
+			경우에는 이와같이 빈값을 지정하여 입력값을 지워야 한다. */
+          event.target.writer.value = '';
+          event.target.contents.value = '';
+          //입력 처리 하기
+          props.writeAction(writer, contents);
         }}
       >
-        <table id="boardTable">
+        {/* JSX에서는 아래의 속성들이 소문자로 작성되면 Warning을 출력한다. 
+					rowspan => rowSpan
+					colspan => colSpan
+					onclick => onClick (이처럼 Camel case로 작성해야한다.)
+					또한 <table>의 경우 <tbody>가 없는 경우에도 Warning이 뜨게된다. 
+			*/}
+        <table>
           <tbody>
             <tr>
-              <td id="writer">
+              <td>
                 Writer : <input type="text" name="writer" />
               </td>
               <td rowSpan="2">
@@ -57,7 +36,7 @@ function ComWrite(props) {
             </tr>
             <tr>
               <td>
-                <textarea name="comment"></textarea>
+                <textarea name="contents" cols="51" rows="5"></textarea>
               </td>
             </tr>
           </tbody>

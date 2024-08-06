@@ -2,42 +2,45 @@ import React from 'react';
 import { useState } from 'react';
 
 function ComEdit(props) {
-  const [writerName, setWriterName] = useState(props.myData.writer);
-  const [commentCon, setCommentCon] = useState(props.myData.comment);
+  const [writer, setWriter] = useState(props.selectData.writer);
+  const [contents, setContents] = useState(props.selectData.contents);
+  //console.log("작성자", props.selectData.writer);
 
   return (
     <>
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-
-          let writer = e.target.writer.value;
-          let comment = e.target.comment.value;
-          props.editComment(props.comIdx, writer, comment);
-          props.setShowEdit(false);
+        onSubmit={(event) => {
+          event.preventDefault();
+          //폼값 가져오기
+          let writer = event.target.writer.value;
+          let contents = event.target.contents.value;
+          //입력값 지우기
+          event.target.writer.value = '';
+          event.target.contents.value = '';
+          //수정 처리 하기
+          props.editAction(writer, contents);
         }}
       >
-        <table id="boardTable">
+        <table>
           <tbody>
             <tr>
-              <td id="writer">
+              <td>
                 Writer :
                 <input
                   type="text"
                   name="writer"
-                  value={writerName}
-                  onChange={(e) => {
-                    setWriterName(e.target.value);
+                  value={writer}
+                  onChange={(event) => {
+                    setWriter(event.target.value);
                   }}
                 />
-                <button
+                <input
                   type="button"
+                  value="수정취소"
                   onClick={() => {
-                    props.setShowEdit(!props.showEdit);
+                    props.changeMode('list', null);
                   }}
-                >
-                  수정 취소
-                </button>
+                ></input>
               </td>
               <td rowSpan="2">
                 <input type="submit" value="댓글수정" id="btn" />
@@ -46,10 +49,12 @@ function ComEdit(props) {
             <tr>
               <td>
                 <textarea
-                  name="comment"
-                  value={commentCon}
-                  onChange={(e) => {
-                    setCommentCon(e.target.value);
+                  name="contents"
+                  cols="51"
+                  rows="5"
+                  value={contents}
+                  onChange={(event) => {
+                    setContents(event.target.value);
                   }}
                 ></textarea>
               </td>
