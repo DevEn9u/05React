@@ -1,0 +1,13 @@
+.row {
+  display: flex;
+  /* gap: 0 20px; */
+}
+.myImg {
+  max-width: 300px;
+}
+
+.list {
+  max-height: 500px;
+  width: 50%;
+  overflow: auto;
+}

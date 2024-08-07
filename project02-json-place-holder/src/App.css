@@ -1,0 +1,31 @@
+
+.main_wrap {
+  display: flex;
+  gap: 0 20px;
+}
+
+.list {
+  max-height: 500px;
+  width: 50%;
+  overflow: auto;
+}
+.list .info_con td {
+  padding: 5px;
+}
+
+.view {
+  width: 50%;
+}
+
+.view .info_list li {
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  line-height: 45px;
+}
+.view .info_list .thumbnail {
+  display: flex;
+  align-items: center;
+  gap: 0 30px;
+  line-height: 170px;
+}
+

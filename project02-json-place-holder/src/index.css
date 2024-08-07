@@ -1,0 +1,28 @@
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+tr {
+  border: 1px solid #ccc;
+}
+th {
+  border: 1px solid #ccc;
+}
+td {
+  border: 1px solid #ccc;
+}
+tr.info_con:nth-child(odd) {
+  background-color: #eee;
+}
+.col1 {
+  width: 20%;
+}
+img {
+  max-width: 100%;
+}
