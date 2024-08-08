@@ -1,0 +1,21 @@
+.App {
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.start_tit {
+  margin-top: 10px;
+}
+input[type=text] {
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #bbb;
+  height: 40px;
+}
+.start_btn {
+  border-radius: 5px;
+  border: 1px solid #eee;
+  width: 120px;
+  line-height: 40px;
+  color: lightcoral;
+  font-weight: 700;
+}
