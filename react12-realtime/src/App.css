@@ -1,0 +1,14 @@
+App {
+  margin: 20px;
+}
+input[type='number'] {
+  width: 100px;
+  margin-right: 10px;
+}
+button[type='button'] {
+  /* width: 60px; */
+  margin-right: 10px;
+}
+.naviWrap {
+  padding: 5px;
+}
