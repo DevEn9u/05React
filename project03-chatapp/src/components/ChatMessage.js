@@ -13,6 +13,7 @@ function ChatMessage() {
   const roomId = searchParams.get('roomId');
   const userId = searchParams.get('userId');
   const chatWindow = useRef();
+  const timerRef = useRef();
   const [chatData, setChatData] = useState('');
 
   function chatWrite(chatRoom, chatId, chatMessage) {
@@ -55,6 +56,10 @@ function ChatMessage() {
   const dbRef = ref(realtime, roomId);
   useEffect(() => {
     onValue(dbRef, (snapshot) => {
+      clearInterval(timerRef.current);
+      timerRef.current = setTimeout(() => {
+        scrollTop(chatWindow.current);
+      }, 300);
       const messages = [];
       snapshot.forEach((childSnapshot) => {
         const childData = childSnapshot.val();
@@ -120,11 +125,9 @@ function ChatMessage() {
           </div>
         );
       });
-
       setChatData(showDiv);
-      scrollTop(chatWindow.current);
     });
-  }, [roomId]);
+  }, []);
 
   return (
     <main id="container">

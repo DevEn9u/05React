@@ -56,7 +56,7 @@ function ChatMessage() {
   // 메세지 전송시 시간을 알려줌
   function formatTimestamp(timestamp) {
     const date = new Date(timestamp);
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return date.toLocaleTimeString('ko-KR', [], { hour: '2-digit', minute: '2-digit' });
   }
 
   function getDay(timestamp) {
