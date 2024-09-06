@@ -56,10 +56,11 @@ function ChatMessage() {
   const dbRef = ref(realtime, roomId);
   useEffect(() => {
     onValue(dbRef, (snapshot) => {
-      clearInterval(timerRef.current);
-      timerRef.current = setTimeout(() => {
-        scrollTop(chatWindow.current);
-      }, 300);
+      // clearInterval(timerRef.current);
+      // timerRef.current = setTimeout(() => {
+      //   scrollTop(chatWindow.current);
+      // }, 300);
+      scrollTop(chatWindow.current);
       const messages = [];
       snapshot.forEach((childSnapshot) => {
         const childData = childSnapshot.val();
